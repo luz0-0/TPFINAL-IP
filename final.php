@@ -259,10 +259,6 @@ do {
 
 
     $opcion = trim(fgets(STDIN));
-    if (!is_numeric($opcion) || $opcion < 0 || $opcion > 10) {
-        echo "Opción no válida. Por favor, seleccione una opción entre 0 y 10.\n";
-        continue;
-    }
 
     switch ($opcion) {
         case 1:
