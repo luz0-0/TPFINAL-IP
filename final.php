@@ -92,7 +92,7 @@ function mostrarTemperaturasAnio($temperaturas, $anio) {
 function mostrarTemperaturasMes($temperaturas, $mes) {
     $total = 0;
     $contTemp = 0;
-    echo "Temperaturas para el mes de $mes:\n";
+    echo "Temperaturas de $mes:\n";
     foreach ($temperaturas as $anio => $datosMes) {
         if (isset($datosMes[$mes])) {
             $temperatura = $datosMes[$mes];
@@ -130,8 +130,8 @@ function hallarMaxMin($temperaturas) {
         }
 
         echo "Año $anio:\n";
-        echo "  Temperatura máxima: $temperaturaMax (Mes: $mesMax)\n";
-        echo "  Temperatura mínima: $temperaturaMin (Mes: $mesMin)\n";
+        echo "  Temperatura máxima: $temperaturaMax. Mes: $mesMax)\n";
+        echo "  Temperatura mínima: $temperaturaMin. Mes: $mesMin)\n";
     }
 }
 
@@ -188,7 +188,7 @@ function mostrarDatosInvierno($datosInvierno) {
     foreach ($datosInvierno as $anio => $datosMes) {
         echo "Año: $anio\n";
         foreach ($datosMes as $mes => $temperatura) {
-            echo "Mes: $mes. Temperatura: $temperatura";
+            echo "Mes: $mes. Temperatura: $temperatura \n";
         }
         echo "\n";
     }
@@ -214,7 +214,7 @@ function mostrarArregloAsociativo($arregloAsociativo) {
     foreach ($arregloAsociativo['completa'] as $anio => $datosMes) {
         echo "Año: $anio\n";
         foreach ($datosMes as $mes => $temperatura) {
-            echo "Mes: $mes. Temperatura: $temperatura";
+            echo "Mes: $mes. Temperatura: $temperatura \n";
         }
         echo "\n";
     }
