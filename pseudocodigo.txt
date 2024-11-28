@@ -1,0 +1,342 @@
+// A) Realizar una carga automática de la matriz de temperaturas con los datos propuestos por la cátedra.
+// Módulo que realiza una carga automática de la matriz
+
+MÓDULO cargaAutomatica() RETORNA arreglo multidimensional temperaturas
+
+    temperaturas = arreglo(
+        2014 → arreglo("enero" → 30, "febrero" → 28, "marzo" → 26, "abril" → 22, "mayo" → 18, "junio" → 12, "julio" → 10, "agosto" → 14, "septiembre" → 17, "octubre" → 20, "noviembre" → 25, "diciembre" → 29),
+        2015 → arreglo("enero" → 33, "febrero" → 30, "marzo" → 27, "abril" → 22, "mayo" → 19, "junio" → 13, "julio" → 11, "agosto" → 15, "septiembre" → 18, "octubre" → 21, "noviembre" → 26, "diciembre" → 31),
+        2016 → arreglo("enero" → 34, "febrero" → 32, "marzo" → 29, "abril" → 21, "mayo" → 18, "junio" → 14, "julio" → 12, "agosto" → 16, "septiembre" → 18, "octubre" → 21, "noviembre" → 27, "diciembre" → 32),
+        2017 → arreglo("enero" → 33, "febrero" → 31, "marzo" → 28, "abril" → 22, "mayo" → 18, "junio" → 13, "julio" → 11, "agosto" → 14, "septiembre" → 17, "octubre" → 22, "noviembre" → 26, "diciembre" → 31),
+        2018 → arreglo("enero" → 32, "febrero" → 30, "marzo" → 28, "abril" → 22, "mayo" → 17, "junio" → 12, "julio" → 9, "agosto" → 13, "septiembre" → 16, "octubre" → 20, "noviembre" → 24, "diciembre" → 30),
+        2019 → arreglo("enero" → 32, "febrero" → 30, "marzo" → 27, "abril" → 23, "mayo" → 19, "junio" → 14, "julio" → 12, "agosto" → 11, "septiembre" → 17, "octubre" → 23, "noviembre" → 25, "diciembre" → 29),
+        2020 → arreglo("enero" → 31, "febrero" → 29, "marzo" → 28, "abril" → 21, "mayo" → 19, "junio" → 13, "julio" → 10, "agosto" → 12, "septiembre" → 16, "octubre" → 22, "noviembre" → 27, "diciembre" → 29),
+        2021 → arreglo("enero" → 30, "febrero" → 28, "marzo" → 26, "abril" → 20, "mayo" → 16, "junio" → 12, "julio" → 11, "agosto" → 13, "septiembre" → 17, "octubre" → 21, "noviembre" → 28, "diciembre" → 30),
+        2022 → arreglo("enero" → 31, "febrero" → 29, "marzo" → 27, "abril" → 21, "mayo" → 17, "junio" → 12, "julio" → 11, "agosto" → 15, "septiembre" → 18, "octubre" → 22, "noviembre" → 26, "diciembre" → 30),
+        2023 → arreglo("enero" → 32, "febrero" → 30, "marzo" → 27, "abril" → 20, "mayo" → 16, "junio" → 13, "julio" → 13, "agosto" → 15, "septiembre" → 19, "octubre" → 23, "noviembre" → 28, "diciembre" → 31)
+    )
+    RETORNA temperaturas
+FINMODULO
+
+// B) Realizar una carga manual de la matriz de temperaturas.
+// Función que realiza una carga manual de temperaturas
+
+MÓDULO cargaManual() RETORNA arreglo multidimensional temperaturas
+    anios = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
+    meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    temperaturas = arreglo();
+
+    PARA CADA (anio EN anios) HACER
+        PARA CADA (mes EN meses) HACER
+            ESCRIBIR "Ingrese la temperatura de” mes “de” anio: 
+            LEER temperatura;
+            temperaturas[anio][mes] → temperatura;
+
+    RETORNA temperaturas;
+FIN MÓDULO
+
+// C) Mostrar el contenido de la matriz por filas y columnas.
+// Módulo que muestra el contenido de la matriz como una tabla
+
+MÓDULO mostrarFilasColumnas() RETORNO vacío
+
+    anios → contar_claves(temperaturas); // o anios → 10
+    meses → contar_claves(temperaturas[anios[0]]); // o anios → 12
+
+    ESCRIBIR "Año\t"
+    PARA CADA (mes EN meses) HACER
+        ESCRIBIR mes . "\t"
+
+    ESCRIBIR "\n";
+
+    PARA CADA (anio EN anios) HACER
+        ESCRIBIR anio . "\t"
+        PARA CADA (temperatura EN temperaturas[anio]) HACER
+            ESCRIBIR temperatura . "\t"
+        FIN MÓDULO
+
+// D) Mostrar, dado un año y un mes, el valor de temperatura correspondiente.
+
+MÓDULO mostrarTemperaturaAnioMes(ARREGLO temperaturas, INT anio, mes) RETORNA VACÍO
+    SI (si_existe(temperaturas[anio]) AND si_existe(temperaturas[anio][mes])) 
+        ESCRIBIR "La temperatura en” mes “de” anio "es: " temperaturas[anio][mes] .
+   SINO
+        ESCRIBIR"Los datos recibidos no son válidos. "
+FIN MÓDULO
+
+
+// E) Mostrar para un determinado año, las temperaturas de todos los meses
+
+MÓDULO mostrarTemperaturasAnio(ARREGLO temperaturas, INT anio) RETORNA VACÍO
+    SI (si_existe(temperaturas[anio])) ENTONCES
+        ESCRIBIR "Temperaturas de” anio
+        PARA CADA (mes EN temperaturas[anio]  → temperatura) HACER
+            ESCRIBIR "mes:” temperatura
+   SINO
+            ESCRIBIR "El año recibido no es válido."
+
+// F) Mostrar para un mes determinado, las temperaturas de todos los años y el promedio.
+MÓDULO mostrarTemperaturasMes(ARREGLO temperaturas, INT mes) { RETORNA VACÍO
+    total ← 0;
+    contTemp ← 0;
+    ESCRIBIR "Temperaturas para el mes de” mes
+    PARA CADA (anio EN temperaturas  → datosMes HACER
+        SI (si_existe(datosMes[mes])) ENTONCES
+            temperatura ← datosMes[mes];
+            ESCRIBIR "anio:” temperatura
+            total ← total + temperatura
+            contTemp ← contTemp + 1
+        SINO
+            ESCRIBIR "El mes ingresado no es válido";
+     FINSI
+    SI (contTemp > 0) ENTONCES
+        promedio ← total / contTemp
+        ESCRIBIR "Promedio:” promedio
+   FINSI
+FIN MÓDULO
+
+// G) Hallar las temperaturas máximas y mínimas, indicando año y mes a los que corresponden. Si el máximo o mínimo se repite, mostrar el primero encontrado.
+// Módulo que muestra las temperaturas máximas y mínimas de cada año
+
+MÓDULO hallarMaxMin(ARREGLO temperaturas) RETORNA VACÍO
+    PARA CADA (anio EN temperaturas → datosMes) HACER
+        temperaturaMax ← 0
+        temperaturaMin ← 9999
+        mesMax ← ""
+        mesMin ← ""
+
+        PARA CADA (mes EN datosMes  → temperatura) HACER
+            SI (temperatura > temperaturaMax) ENTONCES
+                temperaturaMax ← temperatura
+                mesMax ← mes
+	FINSI
+            SI
+            (temperatura < temperaturaMin)
+                temperaturaMin ← temperatura
+                mesMin ← mes
+           FINSI
+        FIN PARA CADA
+
+        ESCRIBIR "Año” anio
+        ESCRIBIR "Temperatura máxima:” temperaturaMax “(Mes:” mesMax “)"
+        ESCRIBIR “Temperatura mínima:” temperaturaMin “(Mes: “ mesMin)"
+  FIN PARA CADA
+FIN MÓDULO
+
+// H) Crear y mostrar un arreglo bidimensional con los datos de primavera (oct-nov-dic) de todos los años.
+// Módulo que genera un arreglo que almacena los datos de primavera
+
+MÓDULO datosPrimavera(ARREGLO temperaturas) RETORNA ARREGLO BIDIMENSIONAL datosPrimavera
+    datosPrimavera ← []
+
+    PARA CADA (anio EN temperaturas → datosMes) HACER
+        PARA CADA (mes EN ["octubre", "noviembre", "diciembre"] ) HACER
+            SI (si_existe(datosMes[mes])) ENTONCES
+                datosPrimavera[anio][mes] ← datosMes[mes];
+            FINSI
+        FIN PARA CADA
+    FIN PARA CADA
+RETORNA datosPrimavera
+FIN MÓDULO
+
+// Módulo que muestra el arreglo datosPrimavera
+    MÓDULO mostrarDatosPrimavera(ARREGLO BIDIMENSIONAL datosPrimavera) RETORNA VACÍO
+        PARA CADA ( anio EN datosPrimavera → datosMes) HACER
+            ESCRIBIR "Año:”  anio
+            PARA CADA (mes EN datosMes → temperatura) HACER
+                ESCRIBIR "Mes:” mes “Temperatura: temperatura”
+            FIN PARA CADA
+         FIN PARA CADA
+FIN MÓDULO
+
+// I) Crear y mostrar un arreglo bidimensional con los datos de los últimos 5 años de invierno (jul-ago-sep).
+// Módulo que genera un arreglo que almacena los datos de invierno de los últimos cinco años
+
+
+MÓDULO datosInvierno(ARREGLO MULTIDIMENSIONAL temperaturas) RETORNA ARREGLO BIDIMENSIONAL datosInvierno
+
+    mesesInvierno ← ["julio", "agosto", "septiembre"]
+    aniosInvierno ←  [2019, 2020, 2021, 2022, 2023]
+    datosInvierno ← [ ];
+
+    PARA CADA (anio EN aniosInvierno) HACER
+        SI (si_existe(temperaturas[anio])) ENTONCES
+            PARA CADA (mes EN mesesInvierno) HACER
+                datosInvierno[anio][mes] ← temperaturas[anio][mes];
+            FIN PARA CADA
+        FINSI
+    FIN PARA CADA
+
+    RETORNA datosInvierno
+FIN MÓDULO 
+
+
+
+MÓDULO mostrarDatosInvierno(ARREGLO BIDIMENSIONAL datosInvierno) RETORNA VACÍO
+    PARA CADA (anio EN datosInvierno → datosMes) HACER
+        ESCRIBIR "Año:” anio
+        PARA CADA (mes EN datosMes → temperatura) HACER
+            ESCRIBIR "Mes:” mes. “Temperatura:” temperatura
+        FIN PARA CADA
+   FIN PARA CADA
+FIN MÓDULO
+
+
+// J) Crear un arreglo asociativo que contenga en la primera posición con clave “completa” la matriz completa de temperaturas, en la segunda posición con clave “primavera” la matriz creada en el inciso h., y en la tercera posición con clave “invierno” la matriz creada en el inciso i.
+// Módulo que crea un arreglo asociativo con los datos completos, datosPrimavera y datosInvierno
+
+MÓDULO crearArreglo(ARREGLO MULTIDIMENSIONAL temperaturas) RETORNA ARREGLO ASOCIATIVO arregloAsociativo
+
+    datosPrimavera ← []
+    datosInvierno ← []
+
+    arregloAsociativo ← [
+        "completa" → temperaturas
+        "primavera" → datosPrimavera
+        "invierno" → datosInvierno
+    ];
+    RETORNA arregloAsociativo;
+FIN MÓDULO
+
+// Módulo que muestra el arreglo asociativo
+MÓDULO mostrarArregloAsociativo(ARREGLO ASOCIATIVO arregloAsociativo) RETORNA VACÍO
+    ESCRIBIR "Datos completos:"
+    PARA CADA (anio EN arregloAsociativo['completa'] → datosMes) HACER
+        ESCRIBIR "Año:”  anio"
+        PARA CADA (mes EN datosMes → temperatura) HACER
+            ESCRIBIR "Mes:” mes. “Temperatura:” temperatura"
+        FIN PARA CADA
+    FIN PARA CADA
+
+  ESCRIBIR "Datos de primavera”
+    PARA CADA (anio EN arregloAsociativo['primavera'] → datosMes) HACER
+        ESCRIBIR "Año:” anio
+        PARA CADA (mes EN datosMes → temperatura) HACER
+            ESCRIBIR "Mes:” mes. “Temperatura:” temperatura"
+        FIN PARA CADA
+    FIN PARA CADA
+
+    ESCRIBIR "Datos de invierno:”
+    PARA CADA (anio EN arregloAsociativo['invierno'] → datosMes) HACER
+        ESCRIBIR "Año:” anio
+        PARA CADA (mes EN datosMes → temperatura) HACER
+            ESCRIBIR"Mes:” mes. “Temperatura:” temperatura
+        FIN PARA CADA
+    FIN PARA CADA
+FIN MÓDULO
+
+
+// Programa principal TEMPERATURAS
+
+HACER
+    ESCRIBIR "Menú de opciones:"
+    ESCRIBIR "1. Cargar matriz automática."
+    ESCRIBIR "2. Cargar matriz manual."
+    ESCRIBIR "3. Mostrar el contenido de la matriz por filas y columnas."
+    ESCRIBIR "4. Mostrar temperatura dado un año y un mes."
+    ESCRIBIR "5. Mostrar para un determinado año, las temperaturas de todos los meses."
+    ESCRIBIR "6. Mostrar para un mes determinado, las temperaturas de todos los años y el promedio."
+    ESCRIBIR "7. Mostrar las temperaturas máximas y mínimas."
+    ESCRIBIR "8. Mostrar un arreglo con los datos de primavera."
+    ESCRIBIR "9. Mostrar un arreglo con los datos de invierno de los últimos 5 años."
+    ESCRIBIR "10. Mostrar arreglo."
+    ESCRIBIR "0. Salir"
+    ESCRIBIR "***********************************************************************"
+    ESCRIBIR "IMPORTANTE: el programa no funcionará a menos que se cargue una matriz."
+    ESCRIBIR "***********************************************************************"
+
+    LEER opcion
+
+    SEGÚN (opcion) HACER
+        CASO 1:
+            temperaturas ← cargaAutomatica()
+            ESCRIBIR "Temperaturas cargadas."
+            break
+        CASO 2:
+            temperaturas ← cargaManual()
+            ESCRIBIR "Temperaturas cargadas."
+            break
+        CASO 3:
+            SI (si_existe(temperaturas)) ENTONCES
+                mostrarFilasColumnas(temperaturas)
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 4:
+           SI (si_existe(temperaturas)) ENTONCES
+               ESCRIBIR "Ingrese el año: "
+               LEER anio
+               ESCRIBIR "Ingrese el mes: "
+               LEER mes
+               mostrarTemperaturaAnioMes(temperaturas, anio, mes)
+           SINO
+               ESCRIBIR "No hay datos cargados."
+           FINSI
+            break
+        CASO 5:
+            SI (si_existe(temperaturas)) ENTONCES
+                ESCRIBIR "Ingrese el año: "
+                LEER anio
+                mostrarTemperaturasAnio(temperaturas, anio)
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 6:
+            SI (si_existe(temperaturas)) ENTONCES
+                ESCRIBIR "Ingrese el mes: "
+                LEER mes
+                mostrarTemperaturasMes(temperaturas, mes)
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 7:
+            SI (si_existe(temperaturas)) ENTONCES
+                hallarMaxMin(temperaturas)
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 8:
+            SI (si_existe(temperaturas)) ENTONCES
+                datosPrimavera ← datosPrimavera(temperaturas)
+                ESCRIBIR "Arreglo creado."
+                ESCRIBIR "Datos primavera: "
+                mostrarDatosPrimavera(datosPrimavera)
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 9:
+            SI (si_existe(temperaturas)) ENTONCES
+                datosInvierno ← datosInvierno(temperaturas)
+                ESCRIBIR "Arreglo creado."
+                ESCRIBIR "Datos invierno: "
+                mostrarDatosInvierno(datosInvierno)
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 10:
+            SI (si_existe(temperaturas)) ENTONCES
+                SI (si_existe(datosPrimavera) Y si_existe(datosInvierno)) ENTONCES
+                    arregloAsociativo ← crearArreglo(temperaturas)
+                    ESCRIBIR "Arreglo creado."
+                    mostrarArregloAsociativo(arregloAsociativo)
+                SINO
+                    ESCRIBIR "Los arreglos no fueron creados."
+                FINSI
+            SINO
+                ESCRIBIR "No hay datos cargados."
+            FINSI
+            break
+        CASO 0:
+            ESCRIBIR "Fin programa ^__^"
+            break
+    FIN SEGÚN
+
+MIENTRAS (opcion != 0)
+FIN MIENTRAS
+FIN PROGRAMA
